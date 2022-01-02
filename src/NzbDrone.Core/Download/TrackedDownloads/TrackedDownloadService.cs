@@ -151,6 +151,12 @@ namespace NzbDrone.Core.Download.TrackedDownloads
                 // Calculate custom formats
                 if (trackedDownload.RemoteMovie != null)
                 {
+                    var enhancedParsedMovieInfo = _parsingService.EnhanceMovieInfo(parsedMovieInfo, new List<object> { trackedDownload.RemoteMovie });
+                    if (enhancedParsedMovieInfo != null)
+                    {
+                        parsedMovieInfo = enhancedParsedMovieInfo;
+                    }
+
                     trackedDownload.RemoteMovie.CustomFormats = _formatCalculator.ParseCustomFormat(parsedMovieInfo);
                 }
 

@@ -103,6 +103,13 @@ namespace NzbDrone.Core.DecisionEngine
 
                     result.ReleaseName = report.Title;
                     var remoteMovie = result.RemoteMovie;
+
+                    var enhancedMovieInfo = _parsingService.EnhanceMovieInfo(parsedMovieInfo, new List<object> { remoteMovie });
+                    if (enhancedMovieInfo != null)
+                    {
+                        parsedMovieInfo = enhancedMovieInfo;
+                    }
+
                     remoteMovie.CustomFormats = _formatCalculator.ParseCustomFormat(parsedMovieInfo);
                     remoteMovie.CustomFormatScore = remoteMovie?.Movie?.Profile?.CalculateCustomFormatScore(remoteMovie.CustomFormats) ?? 0;
                     remoteMovie.Release = report;

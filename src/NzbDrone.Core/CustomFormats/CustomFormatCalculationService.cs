@@ -151,7 +151,8 @@ namespace NzbDrone.Core.CustomFormats
                 ExtraInfo = new Dictionary<string, object>
                 {
                     { "IndexerFlags", flags },
-                    { "Size", size }
+                    { "Size", size },
+                    { "OriginalLanguage", movie.OriginalLanguage }
                 }
             };
 
